@@ -159,8 +159,6 @@ python src/train.py trainer.max_epochs=20 data.batch_size=64
 
 ## Resources
 
-OPC : [OpenILT](https://github.com/OpenOPC/OpenILT)
-
 <br>
 
 ## License
