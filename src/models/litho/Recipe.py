@@ -1,6 +1,7 @@
 import torch
 
-class Receipe:
+
+class Recipe:
     # Exposure settings
     Dose = 30  # Unit: mJ/cm2
 

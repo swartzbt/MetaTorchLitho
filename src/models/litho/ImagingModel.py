@@ -2,24 +2,26 @@ import os, sys
 dir_path = os.path.dirname(__file__)
 sys.path.append(dir_path+"/..")
 sys.path.append(dir_path+"/functions")
-from litho.Numerics import Numerics
-from litho.Source import Source
-from litho.Receipe import Receipe
-from litho.Mask import Mask
-from litho.ProjectionObjective import ProjectionObjective
-from litho.FilmStack import FilmStack
-from litho.ImageData import ImageData
-from litho.functions.Calculate1DAerialImage import Calculate1DAerialImage
-from litho.functions.Calculate1DResistImage import Calculate1DResistImage
-from litho.functions.Calculate2DAerialImage import Calculate2DAerialImage
-from litho.functions.Calculate2DResistImage import Calculate2DResistImage
-from litho.functions.Calculate2DTCCMatrix import Calculate2DTCCMatrix
-from litho.functions.CalculateTransferMatrix import CalculateTransferMatrix
-from litho.functions.DecomposeTCC_SOCS import DecomposeTCC_SOCS
-from litho.functions.CalculateNormalImage import CalculateNormalImage
-from litho.functions.CalculateAerialImage_SOCS import CalculateAerialImage_SOCS
+
 import torch
 import numpy as np
+
+from .Numerics import Numerics
+from .Source import Source
+from .Recipe import Recipe
+from .Mask import Mask
+from .ProjectionObjective import ProjectionObjective
+from .FilmStack import FilmStack
+from .ImageData import ImageData
+from .functions.Calculate1DAerialImage import Calculate1DAerialImage
+from .functions.Calculate1DResistImage import Calculate1DResistImage
+from .functions.Calculate2DAerialImage import Calculate2DAerialImage
+from .functions.Calculate2DResistImage import Calculate2DResistImage
+from .functions.Calculate2DTCCMatrix import Calculate2DTCCMatrix
+from .functions.CalculateTransferMatrix import CalculateTransferMatrix
+from .functions.DecomposeTCC_SOCS import DecomposeTCC_SOCS
+from .functions.CalculateNormalImage import CalculateNormalImage
+from .functions.CalculateAerialImage_SOCS import CalculateAerialImage_SOCS
 
 
 class ImagingModel:
@@ -30,7 +32,7 @@ class ImagingModel:
         self.Projector = ProjectionObjective()
         self.FilmStack = FilmStack()
         self.LithoImageProtype = ImageData()
-        self.Receipe = Receipe()
+        self.Receipe = Recipe()
 
     def CalculateAerialImage(self):
         sr = self.Source

@@ -2,8 +2,8 @@ import os, sys
 dir_path = os.path.dirname(__file__)
 sys.path.append(dir_path+"/..")
 
-from litho.Material import Material
-from litho.Resist import Resist
+from .Material import Material
+from .Resist import Resist
 
 
 class Layer:

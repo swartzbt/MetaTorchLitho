@@ -1,10 +1,11 @@
-import os,sys
+import os, sys
 dir_path = os.path.dirname(__file__)
 sys.path.append(dir_path+"/..")
 
-from litho.Layer import Layer
-from litho.Material import Material
-from litho.Resist import Resist
+from .Layer import Layer
+from .Material import Material
+from .Resist import Resist
+
 
 class FilmStack:
     def __init__(self):

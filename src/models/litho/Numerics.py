@@ -8,7 +8,7 @@ class Numerics:
     SampleNumber_Mask_RCWA_X: int = 11  # Sample number for RCWA Mask
     SampleNumber_Mask_RCWA_Y: int = 11
 
-    # sampling number for mask calculatuon => mask / auto
+    # sampling number for mask calculation => mask / auto
     Sample_Calc_Mode: str = 'mask'
 
     SampleNumber_Wafer_X: int = 81
@@ -17,7 +17,7 @@ class Numerics:
     # simulation settings
     SimulationRange_Aerial=0
     SimulationRange_Resist=[]
-    # Normailization
+    # Normalization
     Normalization_Intensity=1
     # Imaging model => 'vector'  'sclar'
     ImageCalculationMode: str = 'vector'
@@ -36,6 +36,7 @@ class Numerics:
     Epsilon0 = torch.tensor(8.854187817*1e-12)  # Permittivity => F/m
     R = 0.0019876  # Gas constant => kcal/(K*mol)
     K0 = 273.15  # Absolute zero => K
+
     def __init__(self):
         pass
 

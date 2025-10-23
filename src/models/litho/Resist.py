@@ -2,9 +2,10 @@
 import os, sys
 dir_path = os.path.dirname(__file__)
 sys.path.append(dir_path+"/..")
-from litho.Material import Material
+
 import math
 
+from .Material import Material
 
 
 class Resist(Material):
