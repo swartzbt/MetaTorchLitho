@@ -13,8 +13,8 @@ from PIL import Image, ImageDraw
 # from gdsii.library import Library
 
 
-from Source import Source
-from ProjectionObjective import ProjectionObjective as PO
+from .Source import Source
+from .ProjectionObjective import ProjectionObjective as PO
 
 IMAGE_WH = 2048
 class Mask:

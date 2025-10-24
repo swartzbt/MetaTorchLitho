@@ -58,16 +58,16 @@ def CalculateShiftedPupilS(wavelength, projector, source, xPitch, yPitch, indexI
     sourceData = source.Calc_SourceSimple()
     M = projector.Reduction
     NA = projector.NA
-    normalized_xPitch = xPitch / (wavelength / NA)
-    normalized_yPitch = yPitch / (wavelength / NA)
+    normalized_xPitch = torch.tensor(xPitch / (wavelength / NA))
+    normalized_yPitch = torch.tensor(yPitch / (wavelength / NA))
     Nf = torch.ceil(2 * normalized_xPitch).int()
     Ng = torch.ceil(2 * normalized_yPitch).int()
     f = (1 / normalized_xPitch) * torch.arange(-Nf, Nf + 1)
     g = (1 / normalized_yPitch) * torch.arange(-Ng, Ng + 1)
     ff, gg = torch.meshgrid(f, g)
-    new_f = ff.flatten() + sourceData.X.flatten()
-    new_g = gg.flatten() + sourceData.Y.flatten()
-    theta, rho = torch.cartesian_to_polar(new_f, new_g)
+    new_f = ff.reshape(-1, 1) + sourceData.X.reshape(1, -1)
+    new_g = gg.reshape(-1, 1) + sourceData.Y.reshape(1, -1)
+    rho, theta = cartesian_to_polar(new_f, new_g)
 
     validPupil = (rho <= 1)
     validRho = rho[validPupil]
@@ -78,7 +78,7 @@ def CalculateShiftedPupilS(wavelength, projector, source, xPitch, yPitch, indexI
     Orientation = 0
     aberration = projector.CalculateAberrationFast(validRho, validTheta, Orientation)  # You need to implement this function
 
-    shiftedPupil = torch.zeros_like(validPupil)
+    shiftedPupil = torch.zeros_like(validPupil, dtype=torch.complex64)
     TempFocus = 1j * 2 * torch.pi / wavelength * torch.sqrt(indexImage ** 2 - NA ** 2 * validRhoSquare)
     shiftedPupil[validPupil] = obliquityFactor * torch.exp(1j * 2 * torch.pi * aberration) * torch.exp(TempFocus * focus)
     shiftedPupil = torch.abs(shiftedPupil)
@@ -108,7 +108,7 @@ def CalculateShiftedPupilV(wavelength, projector, source, xPitch, yPitch, indexI
     obliquityFactor = torch.sqrt(torch.sqrt((1 - (M ** 2 * projector.NA ** 2) * validRhoSquare) / (1 - ((projector.NA / indexImage) ** 2) * validRhoSquare)))
     Orientation = 0
     aberration = projector.CalculateAberrationFast(validRho, validTheta, Orientation)
-    shiftedPupil = torch.zeros(validPupil.size()).to(torch.complex64)
+    shiftedPupil = torch.zeros(validPupil.size(), dtype=torch.complex64)
     TempFocus = 1j * 2 * torch.pi / wavelength * torch.sqrt(indexImage ** 2 - NA ** 2 * validRhoSquare)
     shiftedPupil[validPupil] = obliquityFactor * torch.exp(1j * 2 * torch.pi * aberration) * torch.exp(TempFocus * focus)
     

@@ -20,7 +20,7 @@ class Numerics:
     # Normalization
     Normalization_Intensity=1
     # Imaging model => 'vector'  'sclar'
-    ImageCalculationMode: str = 'vector'
+    ImageCalculationMode: str = 'scalar'
     # Calculation model =>‘abbe’ ‘hopkins’
     ImageCalculationMethod: str = 'abbe'
     # Truncation method for hopkins model => 'order' 'Threshold'
