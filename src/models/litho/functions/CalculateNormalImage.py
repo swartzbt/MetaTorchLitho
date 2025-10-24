@@ -4,11 +4,12 @@ import sys, os
 dir_path = os.path.dirname(__file__)
 sys.path.append(dir_path+"/../..")
 
-from litho.Numerics import Numerics
-from litho.Source import Source
-from litho.Receipe import Receipe
-from litho.Mask import Mask
-from litho.ProjectionObjective import ProjectionObjective
+from ..Numerics import Numerics
+from ..Source import Source
+from ..Recipe import Recipe
+from ..Mask import Mask
+from ..ProjectionObjective import ProjectionObjective
+
 
 def cartesian_to_polar(x, y):
     
@@ -16,6 +17,7 @@ def cartesian_to_polar(x, y):
     theta = torch.atan2(y, x)
 
     return rho, theta
+
 
 def CalculateNormalImage(source, mask, projector, recipe, numerics):
 
@@ -152,18 +154,20 @@ def CalculateNormalImage(source, mask, projector, recipe, numerics):
     normalIntensity = intensityBlank / weight
     return normalIntensity
 
+
 # Define a function to check the correctness of CalculateNormalImage
 def check():
     sr = Source()
     mk = Mask.CreateMask('line_space')  # Initialize with appropriate values
     po = ProjectionObjective()  # Initialize with appropriate values
-    rp = Receipe()  # Initialize with appropriate values
+    rp = Recipe()  # Initialize with appropriate values
     numerics = Numerics()  # Initialize with appropriate values
     # Call the function to be tested
     result = CalculateNormalImage(sr, mk, po, rp, numerics)
     
     # Print some validation information (you can add more checks)
     print("Intensity shape:", result)
+
 
 if __name__ == '__main__':
     # Call the check function to test CalculateSOCS

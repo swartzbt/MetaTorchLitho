@@ -4,7 +4,8 @@ import sys, os
 dir_path = os.path.dirname(__file__)
 sys.path.append(dir_path+"/../..")
 
-from litho.Numerics import Numerics
+from ..Numerics import Numerics
+
 
 def DecomposeTCC_SOCS(TCCMatrix_Stacked, FG_ValidSize, numerics):
     maskNf = numerics.SampleNumber_Mask_X
@@ -60,6 +61,7 @@ def DecomposeTCC_SOCS(TCCMatrix_Stacked, FG_ValidSize, numerics):
 
     return TCCMatrix_Kernel
 
+
 # Define a function to check the correctness of DecomposeTCC_SOCS
 def check():
     
@@ -73,6 +75,7 @@ def check():
     
     # Print the shape of the result for validation (you can add more checks)
     print("Result:", result)
+
 
 if __name__ == '__main__':
 # Call the check function to test DecomposeTCC_SOCS

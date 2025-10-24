@@ -5,13 +5,14 @@ dir_path = os.path.dirname(__file__)
 sys.path.append(dir_path+"/../..")
 
 from CalculateTransferMatrix import CalculateTransferMatrix
-from litho.Numerics import Numerics
-from litho.Source import Source
-from litho.Receipe import Receipe
-from litho.Mask import Mask
-from litho.ProjectionObjective import ProjectionObjective
-from litho.ImageData import ImageData
-from litho.FilmStack import FilmStack
+from ..Numerics import Numerics
+from ..Source import Source
+from ..Recipe import Recipe
+from ..Mask import Mask
+from ..ProjectionObjective import ProjectionObjective
+from ..ImageData import ImageData
+from ..FilmStack import FilmStack
+
 
 def cartesian_to_polar(x, y):
     
@@ -19,6 +20,7 @@ def cartesian_to_polar(x, y):
     theta = torch.atan2(y, x)
 
     return rho, theta
+
 
 def Calculate2DResistImage(source, mask, projector, filmStack, resistLithoImage, receipe, numerics):
 
@@ -301,7 +303,7 @@ def check():
     mk = Mask()  
     po = ProjectionObjective()  
     filmStack = FilmStack()
-    rp = Receipe()  
+    rp = Recipe()
     numerics = Numerics()  
     lithoImage = ImageData()
 
@@ -313,6 +315,7 @@ def check():
     print("ImageX:", result.ImageX)
     print("ImageY:", result.ImageY)
     print("ImageZ:", result.ImageZ)
+
 
 if __name__ == '__main__':
     # Call the check function to test Calculate1DAerialImage

@@ -16,12 +16,13 @@ dir_path = os.path.dirname(__file__)
 sys.path.append(dir_path+"/../..")
 
 from CalculateCharacteristicMatrix import CalculateCharacteristicMatrix
-from litho.Numerics import Numerics
-from litho.Source import Source
-from litho.Receipe import Receipe
-from litho.Mask import Mask
-from litho.ProjectionObjective import ProjectionObjective
-from litho.ImageData import ImageData
+from ..Numerics import Numerics
+from ..Source import Source
+from ..Recipe import Recipe
+from ..Mask import Mask
+from ..ProjectionObjective import ProjectionObjective
+from ..ImageData import ImageData
+
 
 def cartesian_to_polar(x, y):
     
@@ -29,6 +30,7 @@ def cartesian_to_polar(x, y):
     theta = torch.atan2(y, x)
 
     return rho, theta
+
 
 def Calculate1DAerialImage(sr, mk, po,aerail_litho_image, rp, numerics):
     
@@ -211,7 +213,7 @@ def check():
     mk = Mask()  # Initialize with appropriate values
     mk = mk.CreateLineMask(45, 90)
     po = ProjectionObjective()  # Initialize with appropriate values
-    rp = Receipe()  # Initialize with appropriate values
+    rp = Recipe()  # Initialize with appropriate values
     numerics = Numerics()  # Initialize with appropriate values
     aerail_litho_image = ImageData()
 
@@ -224,6 +226,7 @@ def check():
     print("ImageX:", result.ImageX)
     print("ImageY:", result.ImageY)
     print("ImageZ:", result.ImageZ)
+
 
 if __name__ == '__main__':
     # Call the check function to test Calculate1DAerialImage

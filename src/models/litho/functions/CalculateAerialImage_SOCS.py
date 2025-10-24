@@ -4,11 +4,12 @@ import sys, os
 dir_path = os.path.dirname(__file__)
 sys.path.append(dir_path+"/../..")
 
-from litho.Numerics import Numerics
-from litho.Source import Source
-from litho.Receipe import Receipe
-from litho.Mask import Mask
-from litho.ProjectionObjective import ProjectionObjective
+from ..Numerics import Numerics
+from ..Source import Source
+from ..Recipe import Recipe
+from ..Mask import Mask
+from ..ProjectionObjective import ProjectionObjective
+
 
 def CalculateAerialImage_SOCS(mask, TCCMatrix_SOCS, source, projector, numerics):
     # Get Image
@@ -52,6 +53,7 @@ def CalculateAerialImage_SOCS(mask, TCCMatrix_SOCS, source, projector, numerics)
 
     return intensity
 
+
 # Define a function to check the correctness of CalculateSOCS
 def check():
     sr = Source()
@@ -66,6 +68,8 @@ def check():
     # Print some validation information (you can add more checks)
     print("Intensity sum:", torch.sum(result))
     print("Intensity:",result)
+
+
 if __name__ == '__main__':
     # Call the check function to test CalculateSOCS
     check()

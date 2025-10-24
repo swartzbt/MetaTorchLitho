@@ -5,12 +5,12 @@ dir_path = os.path.dirname(__file__)
 sys.path.append(dir_path+"/../..")
 
 from CalculateCharacteristicMatrix import CalculateCharacteristicMatrix
-from litho.Numerics import Numerics
-from litho.Source import Source
-from litho.Receipe import Receipe
-from litho.Mask import Mask
-from litho.ProjectionObjective import ProjectionObjective
-from litho.ImageData import ImageData
+from ..Numerics import Numerics
+from ..Source import Source
+from ..Recipe import Recipe
+from ..Mask import Mask
+from ..ProjectionObjective import ProjectionObjective
+from ..ImageData import ImageData
 
 
 def cartesian_to_polar(x, y):
@@ -19,6 +19,7 @@ def cartesian_to_polar(x, y):
     theta = torch.atan2(y, x)
 
     return rho, theta
+
 
 def Calculate2DAerialImage(source, mask, projector, lithoImage, receipe, numerics):
     mask_nf = numerics.SampleNumber_Mask_X
@@ -95,7 +96,6 @@ def Calculate2DAerialImage(source, mask, projector, lithoImage, receipe, numeric
 
             TempHAber = SpectrumCalc * obliquityFactor * torch.exp(1j * 2 * torch.pi * aberration) * pupilFilter * tempFocus
             
-            
             if numerics.ImageCalculationMode == 'vector':
                 obliqueRaysMatrix = torch.zeros(len(fgSquare), ExyzCalculateNumber_2D)
                 m0xx, m0yx, m0xy, m0yy, m0xz, m0yz = CalculateCharacteristicMatrix(f_calc, g_calc, fgSquare, NA, indexImage)
@@ -157,12 +157,13 @@ def Calculate2DAerialImage(source, mask, projector, lithoImage, receipe, numeric
 
     return lithoImage
 
+
 # Define a function to check the correctness of Calculate1DAerialImage
 def check():
     sr = Source()
     mk = Mask.CreateMask('line_space')  # Initialize with appropriate values
     po = ProjectionObjective()  # Initialize with appropriate values
-    rp = Receipe()  # Initialize with appropriate values
+    rp = Recipe()  # Initialize with appropriate values
     numerics = Numerics()  # Initialize with appropriate values
     aerail_litho_image = ImageData()
 
@@ -175,6 +176,7 @@ def check():
     print("ImageX:", result.ImageX)
     print("ImageY:", result.ImageY)
     print("ImageZ:", result.ImageZ)
+
 
 if __name__ == '__main__':
     # Call the check function to test Calculate1DAerialImage

@@ -6,11 +6,11 @@ dir_path = os.path.dirname(__file__)
 sys.path.append(dir_path+"/../..")
 
 from CalculateCharacteristicMatrix import CalculateCharacteristicMatrix
-from litho.Numerics import Numerics
-from litho.Source import Source
-from litho.Receipe import Receipe
-from litho.Mask import Mask
-from litho.ProjectionObjective import ProjectionObjective
+from ..Numerics import Numerics
+from ..Source import Source
+from ..Recipe import Recipe
+from ..Mask import Mask
+from ..ProjectionObjective import ProjectionObjective
 
 
 def cartesian_to_polar(x, y):
@@ -20,9 +20,10 @@ def cartesian_to_polar(x, y):
 
     return rho, theta
 
+
 def Calculate2DTCCMatrix(source, mask, projector, recipe, numerics):
     # Initialize data
-    NA = projector.NA   # This line can be delete after merging
+    NA = projector.NA   # This line can be deleted after merging
     if projector.LensType == 'Immersion':
         indexImage = projector.Index_ImmersionLiquid
     elif projector.LensType == 'Dry':
@@ -51,6 +52,7 @@ def Calculate2DTCCMatrix(source, mask, projector, recipe, numerics):
     FG_ValidSize = [len(G_Valid), len(F_Valid)]
     
     return TCCMatrix_Stacked, FG_ValidSize
+
 
 def CalculateShiftedPupilS(wavelength, projector, source, xPitch, yPitch, indexImage, focus):
     sourceData = source.Calc_SourceSimple()
@@ -81,6 +83,7 @@ def CalculateShiftedPupilS(wavelength, projector, source, xPitch, yPitch, indexI
     shiftedPupil[validPupil] = obliquityFactor * torch.exp(1j * 2 * torch.pi * aberration) * torch.exp(TempFocus * focus)
     shiftedPupil = torch.abs(shiftedPupil)
     return shiftedPupil, f, g, sourceData
+
 
 def CalculateShiftedPupilV(wavelength, projector, source, xPitch, yPitch, indexImage, focus):
     sourceData = source.Calc_SourceSimple()  # You need to implement this function
@@ -124,6 +127,7 @@ def CalculateShiftedPupilV(wavelength, projector, source, xPitch, yPitch, indexI
 
     return SPXX, SPXY, SPYX, SPYY, SPXZ, SPYZ, f, g, sourceData
 
+
 def GetTCCMatrix(sourceData, shiftedPupil):
     n = sourceData.Value.size(0)  # Get the number of elements
     i = torch.arange(n)  # Create a tensor for row indices
@@ -144,12 +148,13 @@ def GetTCCMatrix(sourceData, shiftedPupil):
 
     return TCCMatrix
 
+
 # Define a function to check the correctness of Calculate2DTCCMatrix
 def check():
     sr = Source()
     mk = Mask()  # Initialize with appropriate values
     po = ProjectionObjective()  # Initialize with appropriate values
-    rp = Receipe()  # Initialize with appropriate values
+    rp = Recipe()  # Initialize with appropriate values
     numerics = Numerics()  # Initialize with appropriate values
 
     # Call the function to be tested
@@ -158,6 +163,7 @@ def check():
     print(torch.sum(tcc))
     print("TCCMatrix:", tcc)
     print("FG:", fg)
+
 
 if __name__ == '__main__':
     # Call the check function to test Calculate2DTCCMatrix

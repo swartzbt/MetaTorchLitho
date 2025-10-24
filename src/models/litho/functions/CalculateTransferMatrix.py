@@ -6,11 +6,11 @@ dir_path = os.path.dirname(__file__)
 sys.path.append(dir_path+"/../..")
 # This class can be substituted by Numerics.py
 
-from litho.Numerics import Numerics
-from litho.FilmStack import FilmStack
-from litho.Layer import Layer
-from litho.Resist import Resist
-from litho.Material import Material
+from ..Numerics import Numerics
+from ..FilmStack import FilmStack
+from ..Layer import Layer
+from ..Resist import Resist
+from ..Material import Material
 
 
 def CalculateTransferMatrix(layers, sin_theta_inc, index_inc, wavelength, pol_mode):
@@ -57,6 +57,7 @@ def CalculateTransferMatrix(layers, sin_theta_inc, index_inc, wavelength, pol_mo
             M22 = ml21 * m12 + ml22 * m22
     
     return M11, M12, M21, M22
+
 
 if __name__ == '__main__':
     f = FilmStack()

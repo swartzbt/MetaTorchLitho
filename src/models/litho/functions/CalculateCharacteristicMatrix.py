@@ -1,5 +1,6 @@
 import torch
 
+
 def CalculateCharacteristicMatrix(f_calc, g_calc, fgSquare, NA, indexImage):
     # Calculate the scaling factors based on numerical aperture (NA) and index of the medium (indexImage)
     alpha = (NA / indexImage) * f_calc
@@ -48,6 +49,7 @@ def CalculateCharacteristicMatrix(f_calc, g_calc, fgSquare, NA, indexImage):
 
     # Return the calculated characteristic matrix components
     return Mxx, Myx, Mxy, Myy, Mxz, Myz
+
 
 if __name__ == '__main__':
     f = torch.ones(5,5)

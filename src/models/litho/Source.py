@@ -653,6 +653,10 @@ def ConvertSourceMatrix2SourceData(s):
 
 # data class
 class SourceData:
+    """
+    Class that defines the sampling points of the source and the intensity profile.
+    It seems like the sampling points have units of NA.
+    """
     def __init__(self, x, y):
         self.X = torch.zeros((x, y))
         self.Y = torch.zeros((x, y))
